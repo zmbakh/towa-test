@@ -19,6 +19,6 @@ class PostConditionChecker implements PostConditionCheckerInterface
      */
     public function check(QuoteTransfer $quoteTransfer): bool
     {
-        return true;
+        return $quoteTransfer->getPyzCartName() !== null;
     }
 }
