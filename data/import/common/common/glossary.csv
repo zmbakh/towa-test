@@ -809,6 +809,8 @@ checkout.customer.order_as_guest,Order as guest,en_US
 checkout.customer.order_as_guest,Als Gast bestellen,de_DE
 checkout.step.order_details.title,Order details,en_US
 checkout.step.order_details.title,Bestelldetails,de_DE
+checkout.step.order_details.name_order,Name the order,en_US
+checkout.step.order_details.name_order,Bestellung benennen,de_DE
 checkout.step.customer.title,Login,en_US
 checkout.step.customer.title,Anmelden,de_DE
 checkout.step.address.title,Address,en_US
