@@ -8,6 +8,8 @@
 namespace Pyz\Yves\CheckoutPage;
 
 use Generated\Shared\Transfer\PaymentTransfer;
+use Pyz\Yves\CheckoutPage\Form\CheckoutOrderDetailsForm;
+use Pyz\Yves\CheckoutPage\Plugin\CheckoutOrderDetailsFormDataProviderPlugin;
 use Spryker\Shared\Kernel\Container\GlobalContainer;
 use Spryker\Shared\Nopayment\NopaymentConfig;
 use Spryker\Yves\Kernel\Container;
@@ -51,6 +53,16 @@ class CheckoutPageDependencyProvider extends SprykerShopCheckoutPageDependencyPr
     public const PLUGINS_CHECKOUT_ORDER_DETAILS_STEP_ENTER_PRE_CHECK = 'PLUGINS_CHECKOUT_ORDER_DETAILS_STEP_ENTER_PRE_CHECK';
 
     /**
+     * @var string
+     */
+    public const ORDER_DETAILS_STEP_SUB_FORMS = 'ORDER_DETAILS_STEP_SUB_FORMS';
+
+    /**
+     * @var string
+     */
+    public const PLUGIN_CHECKOUT_ORDER_DETAILS_FORM_DATA_PROVIDER = 'PLUGIN_CHECKOUT_ORDER_DETAILS_FORM_DATA_PROVIDER';
+
+    /**
      * @param \Spryker\Yves\Kernel\Container $container
      *
      * @return \Spryker\Yves\Kernel\Container
@@ -60,6 +72,8 @@ class CheckoutPageDependencyProvider extends SprykerShopCheckoutPageDependencyPr
         $container = parent::provideDependencies($container);
         $container = $this->extendPyzPaymentMethodHandler($container);
         $container = $this->addCheckoutOrderDetailsStepEnterPreCheckPlugins($container);
+        $container = $this->addOrderDetailsStepSubForms($container);
+        $container = $this->addCheckoutOrderDetailsFormDataProviderPlugin($container);
 
         return $container;
     }
@@ -130,12 +144,36 @@ class CheckoutPageDependencyProvider extends SprykerShopCheckoutPageDependencyPr
     }
 
     /**
+     * @param \Spryker\Yves\Kernel\Container $container
+     *
+     * @return \Spryker\Yves\Kernel\Container
+     */
+    protected function addOrderDetailsStepSubForms(Container $container): Container
+    {
+        $container->set(static::ORDER_DETAILS_STEP_SUB_FORMS, function () {
+            return $this->getOrderDetailsStepSubForms();
+        });
+
+        return $container;
+    }
+
+    /**
      * @return string[]
      */
     protected function getAddressStepSubForms(): array
     {
         return [
             CheckoutAddressCollectionForm::class,
+        ];
+    }
+
+    /**
+     * @return string[]
+     */
+    protected function getOrderDetailsStepSubForms(): array
+    {
+        return [
+            CheckoutOrderDetailsForm::class,
         ];
     }
 
@@ -240,5 +278,27 @@ class CheckoutPageDependencyProvider extends SprykerShopCheckoutPageDependencyPr
         return [
             new PaymentForeignPaymentCollectionExtenderPlugin(),
         ];
+    }
+
+    /**
+     * @param \Spryker\Yves\Kernel\Container $container
+     *
+     * @return \Spryker\Yves\Kernel\Container
+     */
+    protected function addCheckoutOrderDetailsFormDataProviderPlugin(Container $container): Container
+    {
+        $container->set(static::PLUGIN_CHECKOUT_ORDER_DETAILS_FORM_DATA_PROVIDER, function (): StepEngineFormDataProviderInterface {
+            return $this->getCheckoutOrderDetailsFormDataProviderPlugin();
+        });
+
+        return $container;
+    }
+
+    /**
+     * @return \Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface
+     */
+    protected function getCheckoutOrderDetailsFormDataProviderPlugin(): StepEngineFormDataProviderInterface
+    {
+        return new CheckoutOrderDetailsFormDataProviderPlugin();
     }
 }

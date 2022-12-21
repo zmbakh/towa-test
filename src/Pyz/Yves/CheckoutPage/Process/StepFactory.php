@@ -8,10 +8,10 @@
 namespace Pyz\Yves\CheckoutPage\Process;
 
 use Pyz\Yves\CheckoutPage\CheckoutPageDependencyProvider;
+use Pyz\Yves\CheckoutPage\Plugin\Router\CheckoutPageRouteProviderPlugin;
 use Pyz\Yves\CheckoutPage\Process\Steps\OrderDetailsStep;
 use Pyz\Yves\CheckoutPage\Process\Steps\OrderDetailsStep\PostConditionChecker;
 use Spryker\Yves\StepEngine\Dependency\Step\StepInterface;
-use SprykerShop\Yves\CheckoutPage\Plugin\Router\CheckoutPageRouteProviderPlugin;
 use SprykerShop\Yves\CheckoutPage\Process\StepFactory as SprykerStepFactory;
 use SprykerShop\Yves\CheckoutPage\Process\Steps\PostConditionCheckerInterface;
 
@@ -43,7 +43,7 @@ class StepFactory extends SprykerStepFactory
     {
         return new OrderDetailsStep(
             $this->createOrderDetailsStepPostConditionChecker(),
-            CheckoutPageRouteProviderPlugin::ROUTE_NAME_CHECKOUT_ADDRESS,
+            CheckoutPageRouteProviderPlugin::ROUTE_NAME_CHECKOUT_ORDER_DETAILS,
             $this->getConfig()->getEscapeRoute(),
             $this->getCheckoutOrderDetailsStepEnterPreCheckPlugins(),
         );
