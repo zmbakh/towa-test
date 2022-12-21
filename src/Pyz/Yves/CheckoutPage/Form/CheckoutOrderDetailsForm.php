@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Regex;
 
 /**
  * @method \Pyz\Yves\CheckoutPage\CheckoutPageConfig getConfig()
@@ -52,11 +53,12 @@ class CheckoutOrderDetailsForm extends AbstractType
     protected function addPyzCartNameField(FormBuilderInterface $builder)
     {
         $builder->add(static::FIELD_PYZ_CART_NAME, TextType::class, [
-            'label' => 'Cart name',
+            'label' => 'checkout.step.order_details.cart_name',
             'required' => true,
             'constraints' => [
                 new NotBlank(),
                 new Length(['max' => 255]),
+                new Regex('/^[a-z0-9]+$/', 'checkout.validation.order_details.digits_and_lower_case_letters'),
             ],
         ]);
 
