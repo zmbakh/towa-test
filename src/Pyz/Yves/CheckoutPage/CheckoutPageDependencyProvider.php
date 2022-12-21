@@ -46,6 +46,11 @@ class CheckoutPageDependencyProvider extends SprykerShopCheckoutPageDependencyPr
     protected const PYZ_SERVICE_FORM_FACTORY = 'form.factory';
 
     /**
+     * @var string
+     */
+    public const PLUGINS_CHECKOUT_ORDER_DETAILS_STEP_ENTER_PRE_CHECK = 'PLUGINS_CHECKOUT_ORDER_DETAILS_STEP_ENTER_PRE_CHECK';
+
+    /**
      * @param \Spryker\Yves\Kernel\Container $container
      *
      * @return \Spryker\Yves\Kernel\Container
@@ -54,6 +59,7 @@ class CheckoutPageDependencyProvider extends SprykerShopCheckoutPageDependencyPr
     {
         $container = parent::provideDependencies($container);
         $container = $this->extendPyzPaymentMethodHandler($container);
+        $container = $this->addCheckoutOrderDetailsStepEnterPreCheckPlugins($container);
 
         return $container;
     }
@@ -161,6 +167,30 @@ class CheckoutPageDependencyProvider extends SprykerShopCheckoutPageDependencyPr
         return [
             new QuoteApprovalCheckerCheckoutPaymentStepEnterPreCheckPlugin(),
         ];
+    }
+
+    /**
+     * @return \SprykerShop\Yves\CheckoutPageExtension\Dependency\Plugin\CheckoutPaymentStepEnterPreCheckPluginInterface[]
+     */
+    protected function getCheckoutOrderDetailsStepEnterPreCheckPlugins(): array
+    {
+        return [
+            new QuoteApprovalCheckerCheckoutPaymentStepEnterPreCheckPlugin(),
+        ];
+    }
+
+    /**
+     * @param \Spryker\Yves\Kernel\Container $container
+     *
+     * @return \Spryker\Yves\Kernel\Container
+     */
+    protected function addCheckoutOrderDetailsStepEnterPreCheckPlugins(Container $container): Container
+    {
+        $container->set(static::PLUGINS_CHECKOUT_ORDER_DETAILS_STEP_ENTER_PRE_CHECK, function () {
+            return $this->getCheckoutOrderDetailsStepEnterPreCheckPlugins();
+        });
+
+        return $container;
     }
 
     /**
