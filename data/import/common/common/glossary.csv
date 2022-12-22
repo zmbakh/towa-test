@@ -3385,6 +3385,8 @@ customer.order_history.search_type.itemName,Product Name,en_US
 customer.order_history.search_type.itemName,Produktname,de_DE
 customer.order_history.search_type.itemSku,Product SKU,en_US
 customer.order_history.search_type.itemSku,Produkt-SKU,de_DE
+customer.order_history.search_type.pyzCartName,Cart name,en_US
+customer.order_history.search_type.customer.order_history.search_type.pyzCartName,Cart name,de_DE
 customer.order_history.search,Search,en_US
 customer.order_history.search,Suchen,de_DE
 customer.order_history.date_from,From,en_US
