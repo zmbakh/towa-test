@@ -20,6 +20,10 @@ class OrderDetailsStep extends AbstractBaseStep implements StepWithBreadcrumbInt
      */
     protected const STEP_CODE = 'address';
 
+    protected PostConditionCheckerInterface $postConditionChecker;
+
+    protected array $stepEnterPreCheckPlugins;
+
     /**
      * @param \SprykerShop\Yves\CheckoutPage\Process\Steps\PostConditionCheckerInterface $postConditionChecker
      * @param string $stepRoute
@@ -27,12 +31,15 @@ class OrderDetailsStep extends AbstractBaseStep implements StepWithBreadcrumbInt
      * @param array $stepEnterPreCheckPlugins
      */
     public function __construct(
-        protected PostConditionCheckerInterface $postConditionChecker,
+        PostConditionCheckerInterface $postConditionChecker,
         string $stepRoute,
         ?string $escapeRoute,
-        protected array $stepEnterPreCheckPlugins
+        array $stepEnterPreCheckPlugins
     ) {
         parent::__construct($stepRoute, $escapeRoute);
+
+        $this->postConditionChecker = $postConditionChecker;
+        $this->stepEnterPreCheckPlugins = $stepEnterPreCheckPlugins;
     }
 
     /**
