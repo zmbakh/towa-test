@@ -28,7 +28,7 @@ class CheckoutOrderDetailsForm extends AbstractType
     /**
      * @return string
      */
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'orderDetailsForm';
     }
@@ -39,7 +39,7 @@ class CheckoutOrderDetailsForm extends AbstractType
      *
      * @return void
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $this
             ->addPyzCartNameField($builder);
