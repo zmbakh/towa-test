@@ -807,6 +807,12 @@ checkout.customer.proceed_as_guest,Proceed as a guest,en_US
 checkout.customer.proceed_as_guest,Als Gast weiterverfahren,de_DE
 checkout.customer.order_as_guest,Order as guest,en_US
 checkout.customer.order_as_guest,Als Gast bestellen,de_DE
+checkout.step.order_details.title,Order details,en_US
+checkout.step.order_details.title,Bestelldetails,de_DE
+checkout.step.order_details.name_order,Name the order,en_US
+checkout.step.order_details.name_order,Bestellung benennen,de_DE
+checkout.step.order_details.cart_name,Cart name,en_US
+checkout.step.order_details.cart_name,Wagenname,de_DE
 checkout.step.customer.title,Login,en_US
 checkout.step.customer.title,Anmelden,de_DE
 checkout.step.address.title,Address,en_US
@@ -1690,6 +1696,8 @@ checkout.validation.customer_address.not_found,Customer address with ID %id% not
 checkout.validation.customer_address.not_found, Kundenaddresse mit ID %id% wurde nicht gefunden.,de_DE
 checkout.validation.customer_address.not_applicable,Customer addresses are applicable only for customers.,en_US
 checkout.validation.customer_address.not_applicable, Kundenaddressen sind nur für die Kunden anzuwenden.,de_DE
+checkout.validation.order_details.digits_and_lower_case_letters, Only digits and lower-case letters allowed.,en_US
+checkout.validation.order_details.digits_and_lower_case_letters, Nur Ziffern und Kleinbuchstaben erlaubt.,de_DE
 measurement_units.item.name,Item,en_US
 measurement_units.item.name,Stück,de_DE
 measurement_units.standard.weight.kilo.name,Kilo,en_US
@@ -3363,6 +3371,8 @@ customer.order.number_of_items,No. of Items,en_US
 customer.order.number_of_items,Anzahl der Artikel,de_DE
 customer.order.reference,Reference,en_US
 customer.order.reference,Referenz,de_DE
+customer.order.cart_name,Cart Name,en_US
+customer.order.cart_name,Wagenname,de_DE
 customer.order.email,Email,en_US
 customer.order.email,E-Mail-Adresse,de_DE
 customer.order.company_user,Company User,en_US
@@ -3375,6 +3385,8 @@ customer.order_history.search_type.itemName,Product Name,en_US
 customer.order_history.search_type.itemName,Produktname,de_DE
 customer.order_history.search_type.itemSku,Product SKU,en_US
 customer.order_history.search_type.itemSku,Produkt-SKU,de_DE
+customer.order_history.search_type.pyzCartName,Cart name,en_US
+customer.order_history.search_type.customer.order_history.search_type.pyzCartName,Cart name,de_DE
 customer.order_history.search,Search,en_US
 customer.order_history.search,Suchen,de_DE
 customer.order_history.date_from,From,en_US

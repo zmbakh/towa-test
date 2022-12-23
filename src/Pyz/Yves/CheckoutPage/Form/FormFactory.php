@@ -7,7 +7,9 @@
 
 namespace Pyz\Yves\CheckoutPage\Form;
 
+use Pyz\Yves\CheckoutPage\CheckoutPageDependencyProvider;
 use Pyz\Yves\CheckoutPage\Form\Steps\PaymentForm;
+use Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface;
 use Spryker\Yves\StepEngine\Form\FormCollectionHandlerInterface;
 use SprykerShop\Yves\CheckoutPage\Form\FormFactory as SprykerFormFactory;
 
@@ -22,5 +24,29 @@ class FormFactory extends SprykerFormFactory
         $subFormDataProvider = $this->createSubFormDataProvider($createPaymentSubForms);
 
         return $this->createSubFormCollection(PaymentForm::class, $subFormDataProvider);
+    }
+
+    /**
+     * @return \Spryker\Yves\StepEngine\Form\FormCollectionHandlerInterface
+     */
+    public function createOrderDetailsFormCollection(): FormCollectionHandlerInterface
+    {
+        return $this->createFormCollection($this->getOrderDetailsFormTypes(), $this->getCheckoutOrderDetailsFormDataProviderPlugin());
+    }
+
+    /**
+     * @return array<\Symfony\Component\Form\FormTypeInterface>
+     */
+    public function getOrderDetailsFormTypes(): array
+    {
+        return $this->getProvidedDependency(CheckoutPageDependencyProvider::ORDER_DETAILS_STEP_SUB_FORMS);
+    }
+
+    /**
+     * @return \Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface
+     */
+    public function getCheckoutOrderDetailsFormDataProviderPlugin(): StepEngineFormDataProviderInterface
+    {
+        return $this->getProvidedDependency(CheckoutPageDependencyProvider::PLUGIN_CHECKOUT_ORDER_DETAILS_FORM_DATA_PROVIDER);
     }
 }

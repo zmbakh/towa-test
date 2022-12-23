@@ -1,0 +1,36 @@
+{% extends template('page-layout-checkout', 'CheckoutPage') %}
+
+{% define data = {
+    backUrl: _view.previousStepUrl,
+    isMultipleShipmentEnabled: true,
+    title: 'checkout.step.order_details.title' | trans,
+    stepNumber: 1,
+    orderDetailsForm: _view.orderDetailsForm,
+    pyzCartName: _view.orderDetailsForm.pyzCartName.vars.value,
+} %}
+
+{% block containerClass %}container--medium{% endblock %}
+
+{% block content %}
+    {% set jsAddressClass = 'js-address' %}
+    <div class="checkout-order-details">
+        <h4 class="checkout-order-details__name_order">
+            {{ 'checkout.step.order_details.name_order' | trans }}
+        </h4>
+        {% embed molecule('form') with {
+            modifiers: ['checkout-form'],
+            data: {
+                form: data.orderDetailsForm,
+                submit: {
+                    enable: true,
+                    text: 'checkout.step.shipment' | trans,
+                    class: 'button button--big spacing-top spacing-top--big ' ~ jsAddressClass ~ '__form-submit',
+                },
+            },
+            embed: {
+                pyzCartName: data.pyzCartName,
+            },
+        } only %}
+        {% endembed %}
+    </div>
+{% endblock %}
